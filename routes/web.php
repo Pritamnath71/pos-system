@@ -50,20 +50,10 @@ Route::resource(
     PurchaseFileController::class
 );
 
-Route::get(
-    '/purchase-returns',
-    [PurchaseReturnController::class, 'index']
-)->name('purchase-returns.index');
-
-Route::get(
-    '/purchase-returns/create',
-    [PurchaseReturnController::class, 'create']
-)->name('purchase-returns.create');
-
-Route::post(
-    '/purchase-returns',
-    [PurchaseReturnController::class, 'store']
-)->name('purchase-returns.store');
+Route::resource(
+    'purchase-returns',
+    PurchaseReturnController::class
+);
 
 Route::get(
     '/purchase-files',

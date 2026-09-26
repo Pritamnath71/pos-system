@@ -1,173 +1,231 @@
 @extends('layouts.app')
 
+@section('title', 'Purchases')
+
 @section('content')
 
 <div class="page-header">
 
     <div>
-        <div class="page-title">List Purchases</div>
+        <div class="page-title">
+            Purchases
+        </div>
 
         <div class="page-subtitle">
-            Manage and view all purchase transactions
+            Manage purchase transactions
         </div>
     </div>
 
     <a href="{{ route('purchases.create') }}"
-       class="btn-primary-custom">
-        ＋ Add Purchase
+       class="btn btn-primary">
+
+        + Add Purchase
+
     </a>
 
 </div>
 
 
+{{-- Success Message --}}
+@if(session('success'))
+
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+
+@endif
+
+
+{{-- Error Message --}}
+@if(session('error'))
+
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+
+@endif
+
+
+{{-- Validation Errors --}}
+@if($errors->any())
+
+    <div class="alert alert-danger">
+
+        <strong>Please fix the following errors:</strong>
+
+        <ul class="mb-0">
+
+            @foreach($errors->all() as $error)
+
+                <li>{{ $error }}</li>
+
+            @endforeach
+
+        </ul>
+
+    </div>
+
+@endif
+
+
 <div class="card">
-
-    <form method="GET"
-          action="{{ route('purchases.index') }}"
-          class="row g-3 mb-4">
-
-        <div class="col-md-4">
-            <input type="text"
-                   name="search"
-                   value="{{ request('search') }}"
-                   class="form-control"
-                   placeholder="Search reference or supplier...">
-        </div>
-
-        <div class="col-md-3">
-
-            <select name="status" class="form-select">
-
-                <option value="">All Status</option>
-
-                <option value="Pending"
-                    {{ request('status') == 'Pending' ? 'selected' : '' }}>
-                    Pending
-                </option>
-
-                <option value="Completed"
-                    {{ request('status') == 'Completed' ? 'selected' : '' }}>
-                    Completed
-                </option>
-
-            </select>
-
-        </div>
-
-        <div class="col-md-3">
-
-            <select name="payment_status" class="form-select">
-
-                <option value="">All Payment Status</option>
-
-                <option value="Paid"
-                    {{ request('payment_status') == 'Paid' ? 'selected' : '' }}>
-                    Paid
-                </option>
-
-                <option value="Unpaid"
-                    {{ request('payment_status') == 'Unpaid' ? 'selected' : '' }}>
-                    Unpaid
-                </option>
-
-            </select>
-
-        </div>
-
-        <div class="col-md-2">
-
-            <button class="btn btn-primary w-100">
-                Search
-            </button>
-
-        </div>
-
-    </form>
-
 
     <div class="table-responsive">
 
-        <table class="table table-hover">
+        <table class="table">
 
             <thead>
 
                 <tr>
-                    <th>#</th>
+
                     <th>Reference</th>
+
                     <th>Supplier</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Payment</th>
-                    <th>Total</th>
+
+                    <th>Purchase Date</th>
+
+                    <th>Grand Total</th>
+
+                    <th>Payment Due</th>
+
+                    <th>Payment Status</th>
+
                     <th>Action</th>
+
                 </tr>
 
             </thead>
 
+
             <tbody>
 
-            @forelse($purchases as $purchase)
+                @forelse($purchases as $purchase)
 
-                <tr>
+                    <tr>
 
-                    <td>{{ $purchase->id }}</td>
+                        {{-- Reference --}}
+                        <td>
 
-                    <td>
-                        <strong>{{ $purchase->reference_no }}</strong>
-                    </td>
+                            <strong>
+                                {{ $purchase->reference_no }}
+                            </strong>
 
-                    <td>
-                        {{ $purchase->supplier->name ?? 'N/A' }}
-                    </td>
+                        </td>
 
-                    <td>
-                        {{ $purchase->purchase_date }}
-                    </td>
 
-                    <td>
-                        <span class="badge bg-warning-subtle text-warning-emphasis">
-                            {{ $purchase->status }}
-                        </span>
-                    </td>
+                        {{-- Supplier --}}
+                        <td>
 
-                    <td>
-                        <span class="badge bg-info-subtle text-info-emphasis">
-                            {{ $purchase->payment_status }}
-                        </span>
-                    </td>
+                            {{ $purchase->supplier->name ?? 'N/A' }}
 
-                    <td>
-                        ৳ {{ number_format($purchase->grand_total, 2) }}
-                    </td>
+                        </td>
 
-                    <td>
 
-                        <a href="{{ route('purchases.show', $purchase) }}"
-                           class="btn btn-sm btn-outline-primary">
-                            View
-                        </a>
+                        {{-- Purchase Date --}}
+                        <td>
 
-                        <a href="{{ route('purchases.edit', $purchase) }}"
-                           class="btn btn-sm btn-outline-secondary">
-                            Edit
-                        </a>
+                            {{ $purchase->purchase_date?->format('d/m/Y') ?? 'N/A' }}
 
-                    </td>
+                        </td>
 
-                </tr>
 
-            @empty
+                        {{-- Grand Total --}}
+                        <td>
 
-                <tr>
-                    <td colspan="8"
-                        class="text-center py-5 text-muted">
+                            ৳ {{ number_format($purchase->grand_total, 2) }}
 
-                        No purchases found.
+                        </td>
 
-                    </td>
-                </tr>
 
-            @endforelse
+                        {{-- Payment Due --}}
+                        <td>
+
+                            ৳ {{ number_format($purchase->payment_due, 2) }}
+
+                        </td>
+
+
+                        {{-- Payment Status --}}
+                        <td>
+
+                            @if($purchase->payment_status === 'Paid')
+
+                                <span class="badge bg-success">
+                                    Paid
+                                </span>
+
+                            @elseif($purchase->payment_status === 'Partial')
+
+                                <span class="badge bg-warning text-dark">
+                                    Partial
+                                </span>
+
+                            @else
+
+                                <span class="badge bg-secondary">
+                                    {{ $purchase->payment_status ?? 'Unpaid' }}
+                                </span>
+
+                            @endif
+
+                        </td>
+
+
+                        {{-- Actions --}}
+                        <td>
+
+                            <a href="{{ route('purchases.show', $purchase->id) }}"
+                               class="btn btn-sm btn-outline-primary">
+
+                                View
+
+                            </a>
+
+
+                            <a href="{{ route('purchases.edit', $purchase->id) }}"
+                               class="btn btn-sm btn-outline-secondary">
+
+                                Edit
+
+                            </a>
+
+
+                            <form action="{{ route('purchases.destroy', $purchase->id) }}"
+                                  method="POST"
+                                  class="d-inline">
+
+                                @csrf
+
+                                @method('DELETE')
+
+                                <button type="submit"
+                                        class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Are you sure you want to delete this purchase?')">
+
+                                    Delete
+
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                @empty
+
+                    <tr>
+
+                        <td colspan="7"
+                            class="text-center py-4">
+
+                            No purchases found.
+
+                        </td>
+
+                    </tr>
+
+                @endforelse
 
             </tbody>
 
@@ -176,9 +234,16 @@
     </div>
 
 
-    <div class="mt-4">
-        {{ $purchases->links() }}
-    </div>
+    {{-- Pagination --}}
+    @if($purchases->hasPages())
+
+        <div class="mt-3">
+
+            {{ $purchases->links() }}
+
+        </div>
+
+    @endif
 
 </div>
 

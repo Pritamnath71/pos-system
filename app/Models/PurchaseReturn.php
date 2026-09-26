@@ -19,13 +19,11 @@ class PurchaseReturn extends Model
         'status',
     ];
 
-
     protected $casts = [
         'return_date' => 'date',
         'quantity' => 'integer',
         'amount' => 'decimal:2',
     ];
-
 
     public function purchase()
     {

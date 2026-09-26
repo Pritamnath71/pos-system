@@ -40,4 +40,10 @@ public function files()
 {
     return $this->hasMany(PurchaseFile::class);
 }
+public function returns()
+{
+    return $this->hasMany(
+        PurchaseReturn::class
+    );
+}
 }

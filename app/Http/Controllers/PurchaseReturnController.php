@@ -8,52 +8,65 @@ use Illuminate\Http\Request;
 
 class PurchaseReturnController extends Controller
 {
+    /**
+     * Display purchase returns.
+     */
     public function index(Request $request)
     {
-        $query = PurchaseReturn::with('purchase.supplier');
+        $query = PurchaseReturn::with([
+            'purchase.supplier'
+        ]);
 
+        // Search
         if ($request->filled('search')) {
 
             $search = $request->search;
 
             $query->where(function ($q) use ($search) {
 
-                $q->where('reference_no', 'like', "%{$search}%")
+                $q->where(
+                    'reference_no',
+                    'like',
+                    '%' . $search . '%'
+                )
 
-                  ->orWhereHas('purchase', function ($purchaseQuery) use ($search) {
+                ->orWhereHas('purchase', function ($purchaseQuery) use ($search) {
 
-                      $purchaseQuery
-                          ->where('reference_no', 'like', "%{$search}%");
+                    $purchaseQuery->where(
+                        'reference_no',
+                        'like',
+                        '%' . $search . '%'
+                    );
 
-                  });
+                });
 
             });
         }
 
-
+        // Status filter
         if ($request->filled('status')) {
 
             $query->where(
                 'status',
                 $request->status
             );
-
         }
-
 
         $returns = $query
             ->latest()
             ->paginate(10)
             ->withQueryString();
 
-
         return view(
-            'purchase_returns.index',
+            'purchase-returns.index',
             compact('returns')
         );
     }
 
 
+    /**
+     * Show create form.
+     */
     public function create()
     {
         $purchases = Purchase::with('supplier')
@@ -61,31 +74,110 @@ class PurchaseReturnController extends Controller
             ->get();
 
         return view(
-            'purchase_returns.create',
+            'purchase-returns.create',
             compact('purchases')
         );
     }
 
 
+    /**
+     * Store purchase return.
+     */
     public function store(Request $request)
     {
-        // Next step
+        $validated = $request->validate([
+
+            'purchase_id' => [
+                'required',
+                'exists:purchases,id'
+            ],
+
+            'return_date' => [
+                'required',
+                'date'
+            ],
+
+            'quantity' => [
+                'required',
+                'integer',
+                'min:1'
+            ],
+
+            'amount' => [
+                'required',
+                'numeric',
+                'min:0'
+            ],
+
+            'reason' => [
+                'nullable',
+                'string'
+            ],
+
+            'status' => [
+                'required',
+                'string',
+                'max:50'
+            ],
+
+        ]);
+
+
+        // Generate return reference number
+        $referenceNo =
+            'RET-' .
+            now()->format('YmdHis') .
+            '-' .
+            random_int(100, 999);
+
+
+        PurchaseReturn::create([
+
+            'purchase_id' => $validated['purchase_id'],
+
+            'reference_no' => $referenceNo,
+
+            'return_date' => $validated['return_date'],
+
+            'quantity' => $validated['quantity'],
+
+            'amount' => $validated['amount'],
+
+            'reason' => $validated['reason'] ?? null,
+
+            'status' => $validated['status'],
+
+        ]);
+
+
+        return redirect()
+            ->route('purchase-returns.index')
+            ->with(
+                'success',
+                'Purchase return created successfully.'
+            );
     }
 
 
+    /**
+     * Display one purchase return.
+     */
     public function show(PurchaseReturn $purchaseReturn)
     {
-        $purchaseReturn->load(
+        $purchaseReturn->load([
             'purchase.supplier'
-        );
+        ]);
 
         return view(
-            'purchase_returns.show',
+            'purchase-returns.show',
             compact('purchaseReturn')
         );
     }
 
 
+    /**
+     * Show edit form.
+     */
     public function edit(PurchaseReturn $purchaseReturn)
     {
         $purchases = Purchase::with('supplier')
@@ -93,7 +185,7 @@ class PurchaseReturnController extends Controller
             ->get();
 
         return view(
-            'purchase_returns.edit',
+            'purchase-returns.edit',
             compact(
                 'purchaseReturn',
                 'purchases'
@@ -102,18 +194,68 @@ class PurchaseReturnController extends Controller
     }
 
 
+    /**
+     * Update purchase return.
+     */
     public function update(
         Request $request,
         PurchaseReturn $purchaseReturn
     ) {
-        // Next step
+        $validated = $request->validate([
+
+            'purchase_id' => [
+                'required',
+                'exists:purchases,id'
+            ],
+
+            'return_date' => [
+                'required',
+                'date'
+            ],
+
+            'quantity' => [
+                'required',
+                'integer',
+                'min:1'
+            ],
+
+            'amount' => [
+                'required',
+                'numeric',
+                'min:0'
+            ],
+
+            'reason' => [
+                'nullable',
+                'string'
+            ],
+
+            'status' => [
+                'required',
+                'string',
+                'max:50'
+            ],
+
+        ]);
+
+
+        $purchaseReturn->update($validated);
+
+
+        return redirect()
+            ->route('purchase-returns.index')
+            ->with(
+                'success',
+                'Purchase return updated successfully.'
+            );
     }
 
 
-    public function destroy(
-        PurchaseReturn $purchaseReturn
-    ) {
-
+    /**
+     * Delete purchase return.
+     */
+    public function destroy(PurchaseReturn $purchaseReturn)
+    {
         $purchaseReturn->delete();
 
         return redirect()
