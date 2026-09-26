@@ -124,7 +124,7 @@ The page provides an organized interface for managing existing purchase records.
 
 ## 3. View Purchase
 
-![View Purchase](screenshots/view-purchase.png)
+![View Purchase](screenshots/view-purchases.png)
 
 The View Purchase page displays detailed information about a selected purchase.
 
@@ -147,7 +147,7 @@ The page allows users to review the complete purchase information.
 ---
 ## 4. Edit Purchase
 
-![Edit Purchase](screenshots/edit-purchase.png)
+![Edit Purchase](screenshots/edit-purchases.png)
 
 The Edit Purchase page allows administrators to update existing purchase information.
 
