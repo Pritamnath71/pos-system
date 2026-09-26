@@ -1,8 +1,8 @@
 # POS Management System
 
-A web-based **Point of Sale (POS) Management System** developed using **Laravel, PHP, Blade, Bootstrap, JavaScript, and MySQL**.
+A web-based **Point of Sale (POS) Management System** developed using **Laravel, PHP, Bootstrap, JavaScript, and MySQL**.
 
-The system provides a modern POS dashboard and purchasing management interface with database integration, authentication, CRUD operations, search, filtering, purchase returns, file upload, and administrator management.
+The system provides a modern POS dashboard and purchasing management interface with database integration, purchase returns, file upload, and administrator management.
 
 ---
 
@@ -21,17 +21,11 @@ The system currently focuses on the dashboard and purchase management section.
 - Edit Purchase
 - Delete Purchase
 - Search Purchases
-- Filter Purchases
 - Purchase Returns
 - Purchase Return Reason
 - Purchase File Upload
 - File Download
 - File Delete
-- Admin Profile
-- Admin Settings
-- Login
-- Registration
-- Logout
 
 The project follows the **Laravel MVC architecture** and uses **MySQL** for persistent data storage.
 
@@ -46,7 +40,6 @@ The project follows the **Laravel MVC architecture** and uses **MySQL** for pers
 - Bootstrap 5
 - Bootstrap Icons
 - JavaScript
-- Blade Template Engine
 
 ## Backend
 
