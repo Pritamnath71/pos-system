@@ -1,59 +1,382 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# POS Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A web-based **Point of Sale (POS) Management System** developed using **Laravel, PHP, Blade, Bootstrap, JavaScript, and MySQL**.
 
-## About Laravel
+The system provides a modern POS dashboard and purchasing management interface with database integration, authentication, CRUD operations, search, filtering, purchase returns, file upload, and administrator management.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Project Overview
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The main objective of this project is to develop an independent Laravel-based POS Management System with a clean and user-friendly interface.
 
-## Learning Laravel
+The system currently focuses on the dashboard and purchase management section.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Implemented Areas
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Home Dashboard
+- List Purchases
+- Add Purchase
+- View Purchase
+- Edit Purchase
+- Delete Purchase
+- Search Purchases
+- Filter Purchases
+- Purchase Returns
+- Purchase Return Reason
+- Purchase File Upload
+- File Download
+- File Delete
+- Admin Profile
+- Admin Settings
+- Login
+- Registration
+- Logout
 
-## Laravel Sponsors
+The project follows the **Laravel MVC architecture** and uses **MySQL** for persistent data storage.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+# Technology Stack
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Frontend
 
-## Contributing
+- HTML5
+- CSS3
+- Bootstrap 5
+- Bootstrap Icons
+- JavaScript
+- Blade Template Engine
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Backend
 
-## Code of Conduct
+- PHP
+- Laravel Framework
+- Laravel MVC Architecture
+- Eloquent ORM
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Database
 
-## Security Vulnerabilities
+- MySQL
+- Laravel Migrations
+- Eloquent Relationships
+- Database CRUD Operations
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Development Tools
 
-## License
+- Visual Studio Code
+- Composer
+- Node.js
+- NPM
+- Git
+- GitHub
+- XAMPP
+- PHP
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+# Implemented Modules
+
+The POS Management System currently includes the following implemented modules and interfaces.
+
+---
+
+## 1. Home Dashboard
+
+![Home Dashboard](screenshots/dashboard.png)
+
+The Home Dashboard provides an overview of the POS system.
+
+It includes:
+
+- Sales overview
+- Purchase overview
+- Product overview
+- Customer overview
+- Quick Actions
+- System Overview
+- Recent Purchases
+- POS navigation
+- Purchase shortcuts
+- Notification button
+- Administrator profile menu
+
+The dashboard provides a centralized starting point for accessing the major functions of the application.
+
+---
+
+## 2. List Purchases
+
+![List Purchases](screenshots/list-purchases.png)
+
+The List Purchases page displays all available purchase records in a structured table.
+
+The page includes:
+
+- Purchase reference number
+- Supplier
+- Purchase date
+- Status
+- Payment status
+- Grand total
+- Payment due
+- View action
+- Edit action
+- Delete action
+- Pagination
+
+The page provides an organized interface for managing existing purchase records.
+
+---
+
+## 3. View Purchase
+
+![View Purchase](screenshots/view-purchase.png)
+
+The View Purchase page displays detailed information about a selected purchase.
+
+It includes:
+
+- Purchase reference number
+- Supplier
+- Purchase date
+- Purchase status
+- Payment status
+- Grand total
+- Payment due
+- Notes
+- Purchase items
+
+The page allows users to review the complete purchase information.
+
+---
+
+---
+## 4. Edit Purchase
+
+![Edit Purchase](screenshots/edit-purchase.png)
+
+The Edit Purchase page allows administrators to update existing purchase information.
+
+Users can modify:
+
+- Supplier
+- Purchase date
+- Status
+- Payment status
+- Purchase information
+- Notes
+
+The existing purchase information is loaded automatically into the edit form.
+
+---
+
+## 5. Add Purchase
+
+![Add Purchase](screenshots/add-purchase.png)
+
+The Add Purchase page provides an interface for creating a new purchase.
+
+The purchase form includes:
+
+- Reference number
+- Supplier
+- Purchase date
+- Status
+- Payment status
+- Grand total
+- Payment due
+- Notes
+- Purchase items
+
+Purchase items include:
+
+- Product name
+- Quantity
+- Unit cost
+- Subtotal
+
+---
+
+## 6. Purchase Items
+
+![Purchase Items](screenshots/purchase-items.png)
+
+Each purchase can contain multiple purchase items.
+
+The purchase item system stores:
+
+- Product name
+- Quantity
+- Unit cost
+- Subtotal
+
+Each purchase item is connected to its parent purchase using a database relationship.
+
+The structure is:
+
+Purchase
+
+→ Purchase Item
+
+→ Purchase Item
+
+→ Purchase Item
+
+---
+
+## 7. Delete Purchase
+
+![Delete Purchase](screenshots/delete-purchase.png)
+
+The system provides a delete function for removing purchase records.
+
+When a purchase is deleted, its related purchase items are also removed through the database relationship.
+
+The application uses Laravel and database cascade deletion to maintain data consistency.
+
+---
+
+## 8. Purchase Return
+
+![Purchase Return_List](screenshots/purchase-return.png)
+![Purchase Return](screenshots/purchase-return2.png)
+
+The Purchase Return module allows administrators to manage returned purchases.
+
+The system stores:
+
+- Purchase
+- Return reference number
+- Return date
+- Quantity
+- Return amount
+- Reason
+- Status
+
+The default return status is:
+
+`Pending`
+
+---
+
+
+## 9. Purchase File Upload
+
+![Purchase File Upload](screenshots/file-up.png)
+
+The Purchase File Upload module allows users to upload files related to purchase records.
+
+The module provides:
+
+- File upload
+- File listing
+- File storage
+- Purchase file association
+- File management
+
+This can be used for storing purchase-related documents and supporting files.
+
+---
+
+## 10. Purchase File Download
+
+![Purchase File Download](screenshots/download.png)
+
+Uploaded purchase files can be downloaded from the File Upload section.
+
+The download functionality allows users to retrieve previously uploaded purchase documents.
+
+---
+
+## 11. Purchase File Delete
+
+![Purchase File Delete](screenshots/delete.png)
+
+The system also provides a delete option for uploaded purchase files.
+
+Administrators can remove files that are no longer required.
+
+
+---
+
+## 12. Admin Dropdown
+
+![Admin Dropdown](screenshots/admin.png)
+
+The administrator button in the top navigation provides a dropdown menu.
+
+The dropdown includes:
+
+- Profile
+- Settings
+- Logout
+
+---
+
+## 13. POS Navigation Bar
+
+![POS Navigation](screenshots/navigation.png)
+
+The POS interface includes a navigation bar for quickly accessing important system functions.
+
+The navigation includes:
+
+- Dashboard
+- Purchase shortcuts
+- Calculator
+- POS button
+- Notification button
+- Date
+- Administrator account
+
+---
+
+## 14. Calculator
+
+![Calculator](screenshots/calculator.png)
+
+The navigation bar includes a calculator interface for performing basic calculations.
+
+The calculator supports:
+
+- Addition
+- Subtraction
+- Multiplication
+- Division
+- Clear
+- Result calculation
+
+The calculator is designed to provide quick calculations while working with POS transactions.
+
+---
+
+## 15. Notification Button
+
+![Notifications](screenshots/notifications.png)
+
+The top navigation includes a notification button.
+
+The notification interface provides a location for displaying system notifications.
+
+The notification functionality can be expanded in future development to display:
+
+- New purchases
+- Purchase returns
+- Stock alerts
+- Payment notifications
+- Other system events
+
+---
+
+# Database Structure
+
+The main database tables used by the purchase management system include:
+
+```text
+purchases
+purchase_items
+purchase_returns
+purchase_files
+suppliers
+users
